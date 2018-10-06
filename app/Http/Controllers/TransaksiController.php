@@ -13,8 +13,12 @@ class TransaksiController extends Controller
      */
     public function index()
     {
-       $transaksi=Transaksi::all();
-       return view('transaksi',compact('transaksi'));
+       $transaksinew=Transaksi::where('status','new')->get();
+       $transaksiprocess=Transaksi::where('status','process')->get();
+       $transaksidelivery=Transaksi::where('status','delivery')->get();
+       $transaksifinished=Transaksi::where('status','finished')->get();
+       $transaksicanceled=Transaksi::where('status','canceled')->get();
+       return view('transaksi',compact('transaksinew','transaksiprocess','transaksidelivery','transaksifinished','transaksicanceled'));
     }
 
     /**

@@ -25,7 +25,7 @@
                   </tr>
                 </thead>
                 <tbody>
-                  @foreach($transaksi as $transaksi)
+                  @foreach($transaksinew as $transaksi)
                   @if($transaksi->status=='new')
                   <tr>
                     <td>
@@ -41,6 +41,7 @@
                     </td>
                   </tr>
                   @endif
+                  @endforeach
                 </tbody>
               </table>
             </div>
@@ -66,6 +67,7 @@
                   </tr>
                 </thead>
                 <tbody>
+                  @foreach($transaksiprocess as $transaksi)
                   @if($transaksi->status=='process')
                   <tr>
                     <td>
@@ -80,6 +82,7 @@
                     </td>
                   </tr>
                   @endif
+                  @endforeach
                 </tbody>
               </table>
             </div>
@@ -106,6 +109,7 @@
                   </tr>
                 </thead>
                 <tbody>
+                  @foreach($transaksidelivery as $transaksi)
                   @if($transaksi->status=='delivery')
                   <tr>
                     <td>
@@ -114,12 +118,14 @@
                     <td class="hidden-phone">{{ $transaksi->tujuan_antar }}</td>
                     <td>{{ $transaksi->total_harga }} </td>
                     <!-- <td><span class="label label-info label-mini">Buka</span></td> -->
+                    <td>{{ $transaksi->kurir_id }} </td>
                     <td>
                       <button class="btn btn-success btn-xs"><i class="fa fa-eye">&nbsp;Detail</i></button>
                     </td>
-                    <td>{{ $transaksi->kurir }} </td>
+                    
                   </tr>
                   @endif
+                  @endforeach
                 </tbody>
               </table>
             </div>
@@ -144,30 +150,23 @@
                   </tr>
                 </thead>
                 <tbody>
+                  @foreach($transaksifinished as $transaksi)
+                  @if($transaksi->status=='finished')
                   <tr>
                     <td>
-                      <a href="basic_table.html#">1157050152</a>
+                      {{$transaksi->detailTransaksi_id}}
                     </td>
-                    <td class="hidden-phone">Lorem Ipsum dolor</td>
-                    <td>12000.00$ </td>
+                    <td class="hidden-phone">{{ $transaksi->tujuan_antar }}</td>
+                    <td>{{ $transaksi->total_harga }} </td>
                     <!-- <td><span class="label label-info label-mini">Buka</span></td> -->
-                    <td>Asep Gunawan</td>
+                    <td>{{ $transaksi->kurir_id }} </td>
                     <td>
-                      <a href="invoice.php"><button class="btn btn-success btn-xs"><i class="fa fa-eye">&nbsp; Detail</i></button></a>
+                      <button class="btn btn-success btn-xs"><i class="fa fa-eye">&nbsp;Detail</i></button>
                     </td>
+                    
                   </tr>
-                  <tr>
-                    <td>
-                      <a href="basic_table.html#">1157050152</a>
-                    </td>
-                    <td class="hidden-phone">Lorem Ipsum dolor</td>
-                    <td>12000.00$ </td>
-                    <!-- <td><span class="label label-info label-mini">Buka</span></td> -->
-                    <td>Asep Gunawan</td>
-                    <td>
-                      <a href="invoice.php"><button class="btn btn-success btn-xs"><i class="fa fa-eye">&nbsp; Detail</i></button></a>
-                    </td>
-                  </tr>                  
+                  @endif
+                  @endforeach                  
                 </tbody>
               </table>
             </div>
@@ -189,13 +188,26 @@
                 </thead>
                 <tbody>
                   <tr>
-                    <td>1</td>
-                    <td>Mark</td>
-                    <td>Otto</td>
-                    <td><button class="btn btn-danger btn-xs"><i class="fa fa-trash "></i>&nbsp;Delete</button></td>
+                    @foreach($transaksicanceled as $transaksi)
+                  @if($transaksi->status=='canceled')
+                  <tr>
+                    <td>
+                      {{$transaksi->detailTransaksi_id}}
+                    </td>
+                    <td class="hidden-phone">{{ $transaksi->tujuan_antar }}</td>
+                    <td>{{ $transaksi->total_harga }} </td>
+                    <!-- <td><span class="label label-info label-mini">Buka</span></td> -->
+                    <td>
+                      <td><button class="btn btn-danger btn-xs"><i class="fa fa-trash "></i>&nbsp;Delete</button></td>
+                    </td>
+                    
+                  </tr>
+                  @endif
+                  @endforeach
                   </tr>
                 </tbody>
               </table>
+
             </div>
           </div>
           <!-- /col-md-12 -->
@@ -203,7 +215,6 @@
        
       </section>
     </section>
-    @endforeach
     <!-- /MAIN CONTENT -->
     <!--main content end-->
     <!--footer start-->
